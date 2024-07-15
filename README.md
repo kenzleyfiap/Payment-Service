@@ -5,7 +5,7 @@ Serviço responsável por operacionalizar a cobrança de um pedido, registrando 
 <img src="assets/fiap_services.drawio.png" width="400" height="500">
 
 ### Evidência sonar
-<img src="assets/sonar.PNG">
+<img src="assets/sonar.png">
 
 ## Comandos para rodar os testes
 
