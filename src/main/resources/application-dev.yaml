@@ -16,4 +16,4 @@ order:
       url: ${ORDER_SERVICE_URL}
 
 server:
-  port: 8082
+  port: 8083
