@@ -1,9 +1,9 @@
 spring:
   data:
     mongodb:
-      host: localhost
+      host: ${MONGO_HOST}
       port: 27017
-      database: payment
+      database: ${MONGO_DB}
 
 mercado:
   pago:
@@ -13,7 +13,7 @@ mercado:
 order:
   payment:
     status:
-      url: http://localhost:8081/orders
+      url: ${ORDER_SERVICE_URL}
 
 server:
   port: 8083

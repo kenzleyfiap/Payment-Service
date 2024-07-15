@@ -1,7 +1,7 @@
 package br.com.kenzley.fiap.service.payment.infrastructure.repository;
 
 import br.com.kenzley.fiap.service.payment.infrastructure.entity.PaymentEntity;
-import br.com.kenzley.fiap.service.payment.infrastructure.utils.PaymentHelper;
+import br.com.kenzley.fiap.service.payment.utils.PaymentHelper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

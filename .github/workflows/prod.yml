@@ -1,0 +1,41 @@
+name: Deploy Service Payment
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup Java
+              uses: actions/setup-java@v3
+              with:
+                distribution: 'temurin'
+                java-version: '17'
+
+            - name: Build Project
+              run: mvn clean install
+
+            - name: SonarCloud Scan
+              run: mvn sonar:sonar -Dsonar.organization=kenzleyfiap -Dsonar.projectKey=${{secrets.PAYMENT_SERVICE_KEY}} -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+            - name: Login Docker Hub
+              run: docker login -u ${{secrets.DOCKER_LOGIN}} -p ${{secrets.DOCKER_PASSWORD}}
+
+            - name: Build docker image
+              run: docker build -t luankenzley/payment-service .
+            - name: Push image docker
+              run: docker push luankenzley/payment-service
+
+    deploy:
+        needs: build
+        runs-on: self-hosted
+        steps:
+            - name: Pull image from docker hub
+              run: docker pull luankenzley/payment-service:latest
+            - name: Run docker container
+              run: docker run -d -p 8083:8083  -e HOST_MONGO=${{secrets.HOST_MONGO}} -e DATABASE_NAME_MONGO=${{secrets.DATABASE_NAME_MONGO}} --name deploy_payment-service luankenzley/payment-service

@@ -13,6 +13,7 @@ import com.mercadopago.client.preference.PreferenceRequest;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,15 +31,15 @@ public class PaymentService {
     @Value("${order.payment.status.url}")
     private String orderPaymentStatusUrl;
 
-    private final PaymentRepository paymentRepository;
+    private final PreferenceClient preferenceClient;
 
+    private final PaymentRepository paymentRepository;
 
     public PaymentResponseDTO processPayment(OrderDTO orderDTO) {
 
         try {
             MercadoPagoConfig.setAccessToken(mercadoPagoAccessToken);
 
-            PreferenceClient client = new PreferenceClient();
             List<PreferenceItemRequest> items = new ArrayList<>();
 
             orderDTO.getProducts().forEach(product -> {
@@ -71,7 +72,7 @@ public class PaymentService {
                     .items(items)
                     .build();
 
-            Preference preference = client.create(preferenceRequest);
+            Preference preference = preferenceClient.create(preferenceRequest);
 
 
             var paymentEntiy = PaymentEntity.builder()

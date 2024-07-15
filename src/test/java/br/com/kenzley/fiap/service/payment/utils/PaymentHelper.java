@@ -1,4 +1,4 @@
-package br.com.kenzley.fiap.service.payment.infrastructure.utils;
+package br.com.kenzley.fiap.service.payment.utils;
 
 import br.com.kenzley.fiap.service.payment.api.dto.order.CustomerDTO;
 import br.com.kenzley.fiap.service.payment.api.dto.order.OrderDTO;
@@ -8,6 +8,7 @@ import br.com.kenzley.fiap.service.payment.infrastructure.entity.PaymentEntity;
 import com.mercadopago.client.preference.PreferenceItemRequest;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class PaymentHelper {
@@ -18,25 +19,34 @@ public class PaymentHelper {
                 .collectorId(1L)
                 .initPoint("teste")
                 .clientId("clientId")
+                .dateCreated(LocalDateTime.now())
                 .productIds(List.of("productId", "productId"))
                 .build();
     }
 
     public static OrderDTO gerarOrderDTO() {
         return OrderDTO.builder()
-                .idOrder(1L)
-                .customer(new CustomerDTO("teste", "teste@mail.com", "1234567809"))
                 .products(List.of(gerarProductDTO()))
+                .idOrder(1L)
+                .customer(gerarCustomerDTO())
                 .build();
     }
 
     public static ProductDTO gerarProductDTO() {
         return ProductDTO.builder()
+                .productName("Hamburguer")
+                .productPrice(new BigDecimal("12.0"))
+                .productDescription("Information")
                 .categoryProduct("category")
-                .productDescription("description")
-                .productId("idProduct")
-                .productName("nameProduct")
-                .productPrice(new BigDecimal("1.0"))
+                .quantityProduct(1)
+                .build();
+    }
+
+    public static CustomerDTO gerarCustomerDTO() {
+        return CustomerDTO.builder()
+                .cpf("1234567809")
+                .email("teste@mail.com")
+                .name("teste")
                 .build();
     }
 

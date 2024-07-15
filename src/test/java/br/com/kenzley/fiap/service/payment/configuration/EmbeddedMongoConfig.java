@@ -1,4 +1,4 @@
-package br.com.kenzley.fiap.service.payment.infrastructure.configuration;
+package br.com.kenzley.fiap.service.payment.configuration;
 
 import com.mongodb.client.MongoClients;
 import org.springframework.context.annotation.Bean;

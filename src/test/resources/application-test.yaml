@@ -6,7 +6,7 @@ spring:
 mercado:
   pago:
     access:
-      token: ${MERCADO_PAGO_ACCESS_TOKEN}
+      token: teste
 
 order:
   payment:
