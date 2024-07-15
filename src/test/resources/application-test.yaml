@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+
+mercado:
+  pago:
+    access:
+      token: teste
+
+order:
+  payment:
+    status:
+      url: http://localhost:8081/orders
+

@@ -1,0 +1,19 @@
+spring:
+  data:
+    mongodb:
+      host: ${MONGO_HOST}
+      port: 27017
+      database: ${MONGO_DB}
+
+mercado:
+  pago:
+    access:
+      token: ${MERCADO_PAGO_ACCESS_TOKEN}
+
+order:
+  payment:
+    status:
+      url: ${ORDER_SERVICE_URL}
+
+server:
+  port: 8082
